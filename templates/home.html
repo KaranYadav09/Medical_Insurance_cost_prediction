@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Cost Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='materialize.min.css') }}">
+    <script src="{{ url_for('static', filename='materialize.min.js') }}"></script>
+    <style>
+        /* Main Styling */
+        body {
+            background: linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            margin: 10px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        .nav-links a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Mobile Navbar */
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                text-align: center;
+                padding: 10px;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 50px;
+        }
+        .hero h1 {
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .hero .btn {
+            background: #6200ea;
+            border-radius: 25px;
+            padding: 12px 25px;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        .hero .btn:hover {
+            background: #3700b3;
+            transform: scale(1.05);
+        }
+
+        /* Features Section */
+        .features {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .feature-card {
+            width: 300px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        .feature-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .feature-card h3 {
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .feature-card img {
+                max-width: 80%;
+            }
+        }
+
+        /* Form Styling */
+        .predict-form {
+            margin-top: 50px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .predict-form label {
+            font-size: 18px;
+            display: block;
+            margin-top: 10px;
+        }
+        .predict-form input, .predict-form select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+        .predict-form .btn {
+            margin-top: 20px;
+            background: #ff4081;
+            border-radius: 20px;
+            padding: 10px 20px;
+        }
+        .predict-form .btn:hover {
+            background: #ff1744;
+        }
+
+        /* Prediction Result */
+        .prediction-result {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<div class="navbar">
+    <div class="logo">Medical AI</div>
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="nav-links">
+        <a href="#features-section">Features</a>
+        <a href="{{ url_for('mobile_app') }}">Mobile APP</a>
+        <a href="{{ url_for('pricing') }}">Pricing</a>
+        <a href="{{ url_for('support') }}">Support</a>
+    </div>
+</div>
+
+<!-- Hero Section -->
+<div class="hero">
+    <h1>Predict Medical Costs with AI</h1>
+    <p>Use advanced machine learning to estimate insurance costs instantly.</p>
+    <form action="{{ url_for('predict') }}" method="POST">
+        <button type="submit" class="btn">Get Started</button>
+    </form>    
+</div>
+
+<!-- Features Section -->
+<div id="features-section" class="features">
+    <div class="feature-card">
+        <img src="{{ url_for('static', filename='feature1.jpg') }}" alt="Feature 1">
+        <h3>AI-Powered Predictions</h3>
+    </div>
+    <div class="feature-card">
+        <img src="{{ url_for('static', filename='feature2.jpg') }}" alt="Feature 2">
+        <h3>Accurate & Fast</h3>
+    </div>
+    <div class="feature-card">
+        <img src="{{ url_for('static', filename='feature3.jpg') }}" alt="Feature 3">
+        <h3>Secure & Reliable</h3>
+    </div>
+</div>
+
+<script>
+    function toggleMenu() {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle("active");
+    }
+</script>
+
+</body>
+</html>

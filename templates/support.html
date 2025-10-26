@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support | Medical AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='materialize.min.css') }}">
+    <script src="{{ url_for('static', filename='materialize.min.js') }}"></script>
+    <style>
+        body {
+            background: linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background: #ff4081;
+            border-radius: 20px;
+            padding: 10px 20px;
+        }
+        .faq {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .faq-item {
+            margin-bottom: 15px;
+        }
+        .contact-info {
+            margin-top: 20px;
+        }
+        .live-chat {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Support & Help Center</h2>
+        <p>Need help? We are here to assist you.</p>
+
+        <div class="card">
+            <h4>📌 Frequently Asked Questions (FAQs)</h4>
+            <div class="faq">
+                <h5>1️⃣ Age</h5>
+                <div class="faq-item"><b>Q: Does age affect medical cost predictions?</b><br>A: Yes, older individuals generally have higher predicted costs due to increased health risks.</div>
+                <div class="faq-item"><b>Q: Can younger individuals get lower insurance premiums?</b><br>A: Yes, younger individuals typically qualify for lower premiums due to lower health risks.</div>
+                
+                <h5>2️⃣ BMI (Body Mass Index)</h5>
+                <div class="faq-item"><b>Q: How does BMI impact my medical cost prediction?</b><br>A: Higher BMI levels may indicate obesity, which can lead to increased healthcare costs.</div>
+                <div class="faq-item"><b>Q: Can improving my BMI reduce my predicted medical expenses?</b><br>A: Yes, maintaining a healthy BMI may lower your medical risks and potential costs.</div>
+                
+                <h5>3️⃣ Smoking Habit</h5>
+                <div class="faq-item"><b>Q: Why does smoking increase my predicted medical cost?</b><br>A: Smoking is linked to health conditions like lung disease and heart problems, leading to higher expenses.</div>
+                <div class="faq-item"><b>Q: Can quitting smoking lower my insurance premium?</b><br>A: Many insurers offer lower premiums for non-smokers or those who quit smoking.</div>
+                
+                <h5>4️⃣ Region (Location-Based Pricing)</h5>
+                <div class="faq-item"><b>Q: Does my location affect my medical cost prediction?</b><br>A: Yes, medical costs vary by region due to differences in healthcare facilities and insurance policies.</div>
+                <div class="faq-item"><b>Q: Can I use this service for medical cost predictions outside India?</b><br>A: Currently, our predictions are optimized for India but may be expanded globally.</div>
+                
+                <h5>5️⃣ Number of Children (Dependents)</h5>
+                <div class="faq-item"><b>Q: How does having children impact my insurance costs?</b><br>A: Having dependents may increase insurance costs since family coverage is required.</div>
+                <div class="faq-item"><b>Q: Can I add or remove dependents from my insurance plan?</b><br>A: Yes, most insurers allow modifications based on life events like marriage or childbirth.</div>
+                
+                <h5>6️⃣ Gender</h5>
+                <div class="faq-item"><b>Q: Does gender influence medical cost predictions?</b><br>A: Some medical costs vary based on gender-specific health risks, such as maternity care for women.</div>
+                <div class="faq-item"><b>Q: Are insurance rates different for men and women?</b><br>A: In some policies, women may have different premiums due to specific health factors.</div>
+            </div>
+        </div>
+
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mobile App - Medical AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='materialize.min.css') }}">
+  <script src="{{ url_for('static', filename='materialize.min.js') }}"></script>
+  <style>
+    body {
+      background: linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
+      color: white;
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+      margin: 0;
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: 60px auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 50px;
+    }
+
+    .hero-content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 52px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+    }
+
+    .hero-content h1 span {
+      color: #ffeb3b;
+      font-style: italic;
+    }
+
+    .hero-content p {
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1.6;
+      margin-bottom: 35px;
+    }
+
+    /* 🔥 Attractive Button Style */
+    .hero-content .btn {
+      background: linear-gradient(to right, #8e2de2, #4a00e0);
+      border: none;
+      border-radius: 50px;
+      padding: 16px 48px;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      display: inline-block;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-content .btn:hover {
+      background: linear-gradient(to right, #4a00e0, #8e2de2);
+      transform: scale(1.08);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .app-image {
+      flex: 1;
+      text-align: center;
+    }
+
+    .app-image img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      filter: none !important;
+      backdrop-filter: none !important;
+      image-rendering: auto;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-content, .app-image {
+        width: 100%;
+        padding: 10px;
+      }
+
+      .hero-content h1 {
+        font-size: 36px;
+      }
+
+      .hero-content p {
+        font-size: 18px;
+      }
+
+      .app-image img {
+        max-width: 90vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section with Left Text and Right Image -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1><span>Download</span> Our Medical Cost App</h1>
+      <p>Track, predict, and manage your healthcare expenses anytime, anywhere with our smart mobile solution.</p>
+      <a href="{{ url_for('static', filename='MedicalInsuranceCostApp.apk') }}" download class="btn">⬇ Download App</a>
+    </div>
+    <div class="app-image">
+      <img src="{{ url_for('static', filename='app_image.png') }}" alt="Mobile App Preview">
+    </div>
+  </div>
+
+</body>
+</html>

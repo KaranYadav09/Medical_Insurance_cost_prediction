@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Cost Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='materialize.min.css') }}">
+    <script src="{{ url_for('static', filename='materialize.min.js') }}"></script>
+    <style>
+        body {
+            background: linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: left;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .btn {
+            margin-top: 20px;
+            background: #ff4081;
+            border-radius: 20px;
+            padding: 10px 20px;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #ff1744;
+        }
+
+        .error-message {
+            color: #ff1744;
+            font-size: 18px;
+            font-weight: bold;
+            background: rgba(255, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+
+            .btn {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Medical Cost Prediction</h2>
+
+        <!-- Prediction Form -->
+        <div class="card">
+            <h4>Enter Your Details</h4>
+            <form action="/predict" method="POST">
+                <div class="input-field">
+                    <label for="age">Age:</label>
+                    <input type="number" name="age" required value="{{ age or '' }}">
+                </div>
+
+                <div class="input-field">
+                    <label for="bmi">BMI:</label>
+                    <input type="text" name="bmi" required value="{{ bmi or '' }}">
+                </div>
+
+                <div class="input-field">
+                    <label for="children">Children:</label>
+                    <input type="number" name="children" required value="{{ children or '' }}">
+                </div>
+
+                <div class="input-field">
+                    <label for="gender">Gender:</label>
+                    <select name="gender" required>
+                        <option value="0" {% if gender == "0" %} selected {% endif %}>Male</option>
+                        <option value="1" {% if gender == "1" %} selected {% endif %}>Female</option>
+                    </select>
+                </div>
+
+                <div class="input-field">
+                    <label for="smoker">Smoker:</label>
+                    <select name="smoker" required>
+                        <option value="yes" {% if smoker == "yes" %} selected {% endif %}>Yes</option>
+                        <option value="no" {% if smoker == "no" %} selected {% endif %}>No</option>
+                    </select>
+                </div>
+
+                <div class="input-field">
+                    <label for="region">Region:</label>
+                    <select name="region" required>
+                        {% for r in ["southwest", "southeast", "northwest", "northeast"] %}
+                            <option value="{{ r }}" {% if region == r %} selected {% endif %}>{{ r|capitalize }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">Predict Cost</button>
+            </form>
+        </div>
+
+        <!-- Error Message -->
+        {% if error %}
+        <div class="error-message">
+            ❌ {{ error }}
+        </div>
+        {% endif %}
+
+        <!-- Prediction Result -->
+        {% if prediction_usd %}
+        <div class="card">
+            <h3>Predicted Medical Cost:</h3>
+            <h4>💵 USD: ${{ prediction_usd }}</h4>
+            <h4>🇮🇳 INR: ₹{{ prediction_inr }}</h4>
+
+            <!-- Download PDF Button -->
+            <form action="/download-pdf" method="POST">
+                <input type="hidden" name="prediction_usd" value="{{ prediction_usd }}">
+                <input type="hidden" name="prediction_inr" value="{{ prediction_inr }}">
+                <input type="hidden" name="age" value="{{ age or '' }}">
+                <input type="hidden" name="gender" value="{{ gender or '' }}">
+                <input type="hidden" name="bmi" value="{{ bmi or '' }}">
+                <input type="hidden" name="children" value="{{ children or '' }}">
+                <input type="hidden" name="smoker" value="{{ smoker or '' }}">
+                <input type="hidden" name="region" value="{{ region or '' }}">
+                <button type="submit" class="btn pink darken-2">
+                    <i class="material-icons left"></i> Download PDF
+                </button>
+            </form>
+
+            <!-- Share Button -->
+            <button onclick="shareReport()" class="btn blue darken-2" style="margin-top: 15px;">
+                <i class="material-icons left"></i> Share Report
+            </button>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function shareReport() {
+            let age = "{{ age or 'N/A' }}";
+            let bmi = "{{ bmi or 'N/A' }}";
+            let children = "{{ children or 'N/A' }}";
+            let gender = "{{ 'Male' if gender == '0' else 'Female' }}";
+            let smoker = "{{ smoker.capitalize() if smoker else 'N/A' }}";
+            let region = "{{ region.capitalize() if region else 'N/A' }}";
+            let predictionUsd = "{{ prediction_usd or 'N/A' }}";
+            let predictionInr = "{{ prediction_inr or 'N/A' }}";
+    
+            let text = `📄 *Medical Cost Prediction Report* 🏥\n\n`
+                + `🧑 Age: ${age}\n`
+                + `⚖ BMI: ${bmi}\n`
+                + `👶 Children: ${children}\n`
+                + `👨‍⚕️ Gender: ${gender}\n`
+                + `🚬 Smoker: ${smoker}\n`
+                + `📍 Region: ${region}\n`
+                + `💰 Predicted Cost: $${predictionUsd} (USD) / ₹${predictionInr} (INR)\n\n`
+                + `📥 Download your report now!`;
+    
+            let encodedText = encodeURIComponent(text);
+            let whatsappUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
+            let emailUrl = `mailto:?subject=Medical Cost Report&body=${encodedText}`;
+    
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Medical Cost Prediction',
+                    text: text
+                }).catch(err => console.log('Error sharing:', err));
+            } else {
+                let choice = confirm("Would you like to share via WhatsApp? Click 'Cancel' for Email.");
+                if (choice) {
+                    window.open(whatsappUrl, '_blank');
+                } else {
+                    window.open(emailUrl, '_blank');
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
