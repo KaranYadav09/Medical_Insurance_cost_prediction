@@ -109,12 +109,12 @@ medical-insurance-cost-prediction/
 ├── app.py
 ├── requirements.txt
 └── README.md
+
 9. Installation and Setup
 
 Clone the repository:
 
-git clone https://github.com/yourusername/medical-insurance-cost-prediction.git
-
+git clone https://github.com/KaranYadav09/Medical_Insurance_cost_prediction.git
 Navigate to the project directory:
 
 cd medical-insurance-cost-prediction
@@ -126,6 +126,7 @@ pip install -r requirements.txt
 Run the application:
 
 python app.py
+
 10. Usage
 
 Provide input values such as age, BMI, smoking status, and number of children.
