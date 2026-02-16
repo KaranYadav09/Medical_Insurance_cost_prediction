@@ -17,6 +17,7 @@ Predicts insurance charges for new individuals
 
 Helps understand the impact of various features on pricing
 
+
 3. Dataset Description
 
 The dataset contains medical insurance records with the following features:
@@ -66,6 +67,7 @@ Scaling (if applied)
 Categorical features such as sex, smoker, and region were converted into numerical representations suitable for model training.
 
 6. Model Used
+
 XGBoost Regressor
 
 The primary model used in this project is XGBoost (Extreme Gradient Boosting).
@@ -101,6 +103,7 @@ RMSE: 4200
 The results indicate that the model is able to explain a high proportion of variance in insurance charges.
 
 8. Project Structure
+
 medical-insurance-cost-prediction/
 │
 ├── data/
@@ -110,11 +113,12 @@ medical-insurance-cost-prediction/
 ├── requirements.txt
 └── README.md
 
-9. Installation and Setup
+10. Installation and Setup
 
 Clone the repository:
 
 git clone https://github.com/KaranYadav09/Medical_Insurance_cost_prediction.git
+
 Navigate to the project directory:
 
 cd medical-insurance-cost-prediction
